@@ -89,35 +89,22 @@ public class SanPhamChiTietController {
         sanPhamChiTiet.setMaMauSac(mauSacRepository.findById(maMauSacId).orElse(null));
         sanPhamChiTiet.setMaKichThuoc(kichThuocRepository.findById(maKichThuocId).orElse(null));
 
-        // Xử lý upload hình ảnh
+
         // Xử lý upload hình ảnh
         if (hinhAnhFile != null && !hinhAnhFile.isEmpty()) {
             try {
-                String originalFileName = hinhAnhFile.getOriginalFilename();
-                String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-                String newFileName = originalFileName; // Bắt đầu với tên file gốc
-
+                String fileName = System.currentTimeMillis() + "_" + hinhAnhFile.getOriginalFilename();
                 Path uploadPath = Paths.get("src/main/resources/static/images/");
                 if (!Files.exists(uploadPath)) Files.createDirectories(uploadPath);
-
-                // Kiểm tra và thêm số vào tên file nếu file đã tồn tại
-                int counter = 1;
-                while (Files.exists(uploadPath.resolve(newFileName))) {
-                    newFileName = originalFileName.substring(0, originalFileName.lastIndexOf(".")) // Lấy phần tên file không có phần mở rộng
-                            + "_" + counter + fileExtension; // Thêm số đếm vào tên file
-                    counter++;
-                }
-
-                // Lưu ảnh vào thư mục
-                Path filePath = uploadPath.resolve(newFileName);
+                //lưu ảnh vào thư mục
+                Path filePath = uploadPath.resolve(fileName);
                 Files.copy(hinhAnhFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-                sanPhamChiTiet.setHinhAnh(newFileName);
+                sanPhamChiTiet.setHinhAnh(fileName);
             } catch (IOException e) {
                 model.addAttribute("errorMessage", "Lỗi khi tải lên hình ảnh!");
                 return "SanPhamChiTiet/add";
             }
         }
-
 
         sanPhamChiTietService.save(sanPhamChiTiet);
         return "redirect:/main#!/hien-thi-san-pham-chi-tiet";
@@ -163,36 +150,22 @@ public class SanPhamChiTietController {
         sanPhamChiTiet.setMaKichThuoc(kichThuocRepository.findById(maKichThuocId).orElse(null));
 
         // Xử lý upload hình ảnh
-        // Xử lý upload hình ảnh
         if (hinhAnhFile != null && !hinhAnhFile.isEmpty()) {
             try {
-                String originalFileName = hinhAnhFile.getOriginalFilename();
-                String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
-                String newFileName = originalFileName; // Bắt đầu với tên file gốc
-
+                String fileName = System.currentTimeMillis() + "_" + hinhAnhFile.getOriginalFilename();
                 Path uploadPath = Paths.get("src/main/resources/static/images/");
                 if (!Files.exists(uploadPath)) Files.createDirectories(uploadPath);
-
-                // Kiểm tra và thêm số vào tên file nếu file đã tồn tại
-                int counter = 1;
-                while (Files.exists(uploadPath.resolve(newFileName))) {
-                    newFileName = originalFileName.substring(0, originalFileName.lastIndexOf(".")) // Lấy phần tên file không có phần mở rộng
-                            + "_" + counter + fileExtension; // Thêm số đếm vào tên file
-                    counter++;
-                }
-
-                // Lưu ảnh vào thư mục
-                Path filePath = uploadPath.resolve(newFileName);
+                //lưu ảnh vào thư mục
+                Path filePath = uploadPath.resolve(fileName);
                 Files.copy(hinhAnhFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-                sanPhamChiTiet.setHinhAnh(newFileName);
+                sanPhamChiTiet.setHinhAnh(fileName);
             } catch (IOException e) {
                 model.addAttribute("errorMessage", "Lỗi khi tải lên hình ảnh!");
                 return "SanPhamChiTiet/update";
             }
         }
 
-
-        sanPhamChiTietService.save(sanPhamChiTiet);
+        sanPhamChiTietService.save(sanPhamChiTiet); // Lưu lại đối tượng đã cập nhật
         return "redirect:/main#!/hien-thi-san-pham-chi-tiet";
     }
 
