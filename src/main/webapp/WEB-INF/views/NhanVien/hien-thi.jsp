@@ -13,7 +13,7 @@
 <div class="container mt-5">
     <h1 class="h3"><a href="/main">Hệ Thống Quản Lý</a></h1>
     <h1 class="text-center">Danh Sách Nhân Viên</h1>
-    <form action="${pageContext.request.contextPath}/hien-thi-nhan-vien/add" method="post">
+    <form action="/hien-thi-nhan-vien/add" method="post">
         <div class="form-group">
             <label for="hoTen">Họ Tên:</label>
             <input type="text" id="hoTen" name="hoTen" class="form-control" required>
@@ -61,7 +61,7 @@
                 <td>${nhanVien.vaiTro}</td>
                 <td>
                     <a href="/hien-thi-nhan-vien/update/${nhanVien.id}" class="btn btn-warning btn-sm">Sửa</a>
-                    <a href="/hien-thi-nhan-vien/delete?id=${nhanVien.id}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa không?');">Xóa</a>
+                    <a href="/hien-thi-nhan-vien/delete?id=${nhanVien.id}" class="btn btn-danger btn-sm">Xóa</a>
                 </td>
             </tr>
         </c:forEach>

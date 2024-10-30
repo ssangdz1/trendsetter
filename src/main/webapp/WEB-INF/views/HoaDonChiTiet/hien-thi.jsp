@@ -71,7 +71,7 @@
                 <td>${hoaDonChiTiet.soLuong * hoaDonChiTiet.gia}</td>
                 <td>
                     <a href="/hien-thi-hoa-don-chi-tiet/update/${hoaDonChiTiet.id}" class="btn btn-warning btn-sm">Sửa</a>
-                    <a href="/hien-thi-hoa-don-chi-tiet/delete?id=${hoaDonChiTiet.id}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa không?');">Xóa</a>
+                    <a href="/hien-thi-hoa-don-chi-tiet/delete?id=${hoaDonChiTiet.id}" class="btn btn-danger btn-sm">Xóa</a>
                 </td>
             </tr>
         </c:forEach>

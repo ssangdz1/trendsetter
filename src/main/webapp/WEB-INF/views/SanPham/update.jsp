@@ -12,7 +12,7 @@
 <div class="container mt-5">
     <h1 class="h3"><a href="/main">Hệ Thống Quản Lý</a></h1>
     <h1 class="text-center">Sửa Sản Phẩm</h1>
-    <form action="${pageContext.request.contextPath}/hien-thi-san-pham/update" method="post" enctype="multipart/form-data">
+    <form action="/hien-thi-san-pham/update" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="${sanPham.id}"/>
         <div class="form-group">
             <label for="tenSanPham">Tên Sản Phẩm:</label>

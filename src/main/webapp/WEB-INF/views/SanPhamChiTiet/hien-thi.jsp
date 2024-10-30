@@ -43,7 +43,7 @@
 
         <div class="form-group">
             <label for="soLuong">Số Lượng:</label>
-            <input type="number" id="soLuong" name="soLuong" class="form-control" required>
+            <input type="number" id="soLuong" name="soLuong" class="form-control" value="1" readonly>
         </div>
 
         <div class="form-group">

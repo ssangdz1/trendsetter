@@ -13,17 +13,7 @@
 <div class="container mt-5">
     <h1 class="h3"><a href="/main">Hệ Thống Quản Lý</a></h1>
     <h1 class="text-center">Danh Sách Khách Hàng</h1>
-    <form action="${pageContext.request.contextPath}/hien-thi-khach-hang/search" method="get" class="mb-3">
-        <div class="form-row">
-            <div class="col">
-                <input type="text" name="ten" class="form-control" placeholder="Tìm kiếm theo tên khách hàng" value="${query}">
-            </div>
-            <div class="col-auto">
-                <button type="submit" class="btn btn-primary">Tìm Kiếm</button>
-            </div>
-        </div>
-    </form>
-    <form action="${pageContext.request.contextPath}/hien-thi-khach-hang/add" method="post">
+    <form action="/hien-thi-khach-hang/add" method="post">
         <div class="form-group">
             <label for="hoTen">Họ Tên:</label>
             <input type="text" id="hoTen" name="hoTen" class="form-control" required>
@@ -75,7 +65,7 @@
                 <td>${khachHang.matKhau}</td>
                 <td>
                     <a href="/hien-thi-khach-hang/update/${khachHang.id}" class="btn btn-warning btn-sm">Sửa</a>
-                    <a href="/hien-thi-khach-hang/delete?id=${khachHang.id}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa không?');">Xóa</a>
+                    <a href="/hien-thi-khach-hang/delete?id=${khachHang.id}" class="btn btn-danger btn-sm">Xóa</a>
                 </td>
             </tr>
         </c:forEach>

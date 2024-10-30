@@ -11,7 +11,7 @@
 <div class="container mt-5">
     <h1 class="h3"><a href="/main">Hệ Thống Quản Lý</a></h1>
     <h1 class="text-center">Sửa Khách Hàng</h1>
-    <form action="${pageContext.request.contextPath}/hien-thi-khach-hang/update" method="post">
+    <form action="/hien-thi-khach-hang/update" method="post">
         <input type="hidden" name="id" value="${khachHang.id}"/>
         <div class="form-group">
             <label for="hoTen">Họ Tên:</label>

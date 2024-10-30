@@ -5,6 +5,7 @@ import com.example.trendsetter.Entity.SanPhamChiTiet;
 import com.example.trendsetter.Repository.SanPhamChiTietRepository;
 import com.example.trendsetter.Repository.SanPhamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,6 +24,9 @@ public class SanPhamChiTietService {
 
     @Autowired
     SanPhamRepository sanPhamRepository;
+
+    @Value("${upload.path}")
+    private String uploadPath;
 
     // Lấy danh sách tất cả sản phẩm chi tiết
     public List<SanPhamChiTiet> getAll() {
@@ -55,5 +59,24 @@ public class SanPhamChiTietService {
 
     public SanPhamChiTiet getById(Integer id) {
         return sanPhamChiTietRepository.findById(id).orElse(null); // Trả về null nếu không tìm thấy
+    }
+
+    //xử lý upload file
+    public String uploadFile(MultipartFile file) throws IOException {
+        if (file == null || file.isEmpty()) {
+            throw new IllegalArgumentException("File không hợp lệ");
+        }
+
+        //lưu ảnh vào thư mục
+        String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+        Path uploadFolderPath = Paths.get(uploadPath);
+        if (!Files.exists(uploadFolderPath)) {
+            Files.createDirectories(uploadFolderPath);
+        }
+        //
+        Path filePath = uploadFolderPath.resolve(fileName);
+        Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+        return fileName;
     }
 }

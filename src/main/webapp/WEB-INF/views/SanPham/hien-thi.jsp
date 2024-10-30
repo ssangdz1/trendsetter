@@ -17,12 +17,12 @@
 </head>
 <body>
 <div class="container mt-5">
-    <h1 class="h3"><a href="${pageContext.request.contextPath}/main">Hệ Thống Quản Lý</a></h1>
+    <h1 class="h3"><a href="/main">Hệ Thống Quản Lý</a></h1>
 
     <!-- Form thêm -->
     <div class="d-flex justify-content-between">
         <!-- Form Thêm Danh Mục -->
-        <form action="${pageContext.request.contextPath}/hien-thi-san-pham/addDanhMuc" method="post" class="mr-3">
+        <form action="/hien-thi-san-pham/addDanhMuc" method="post" class="mr-3">
             <input type="hidden" name="id" value="danhMuc">
             <div class="form-group">
                 <label>Tên Danh Mục:</label>
@@ -31,7 +31,7 @@
             <button type="submit" class="btn btn-success btn-sm">Thêm</button>
         </form>
         <!-- Form Thêm Màu Sắc -->
-        <form action="${pageContext.request.contextPath}/hien-thi-san-pham/addMauSac" method="post" class="mr-3">
+        <form action="/hien-thi-san-pham/addMauSac" method="post" class="mr-3">
             <input type="hidden" name="id" value="mauSac">
             <div class="form-group">
                 <label>Tên Màu Sắc:</label>
@@ -40,7 +40,7 @@
             <button type="submit" class="btn btn-success btn-sm">Thêm</button>
         </form>
         <!-- Form Thêm Kích Thước -->
-        <form action="${pageContext.request.contextPath}/hien-thi-san-pham/addKichThuoc" method="post">
+        <form action="/hien-thi-san-pham/addKichThuoc" method="post">
             <input type="hidden" name="id" value="kichThuoc">
             <div class="form-group">
                 <label>Tên Kích Thước:</label>
@@ -69,7 +69,7 @@
                         <td>${danhMuc.id}</td>
                         <td>${danhMuc.tenDanhMuc}</td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/hien-thi-san-pham/deleteDM?id=${danhMuc.id}" class="btn btn-danger btn-sm">Xóa</a>
+                            <a href="/hien-thi-san-pham/deleteDM?id=${danhMuc.id}" class="btn btn-danger btn-sm">Xóa</a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -94,7 +94,7 @@
                         <td>${mauSac.id}</td>
                         <td>${mauSac.tenMauSac}</td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/hien-thi-san-pham/deleteMS?id=${mauSac.id}" class="btn btn-danger btn-sm">Xóa</a>
+                            <a href="/hien-thi-san-pham/deleteMS?id=${mauSac.id}" class="btn btn-danger btn-sm">Xóa</a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -119,7 +119,7 @@
                         <td>${kichThuoc.id}</td>
                         <td>${kichThuoc.tenKichThuoc}</td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/hien-thi-san-pham/deleteKT?id=${kichThuoc.id}" class="btn btn-danger btn-sm">Xóa</a>
+                            <a href="/hien-thi-san-pham/deleteKT?id=${kichThuoc.id}" class="btn btn-danger btn-sm">Xóa</a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -159,8 +159,8 @@
                     <td>${sanPham.tenSanPham}</td>
                     <td>${sanPham.maDanhMuc.tenDanhMuc}</td>
                     <td>
-                        <a href="${pageContext.request.contextPath}/hien-thi-san-pham/update/${sanPham.id}" class="btn btn-warning btn-sm">Sửa</a>
-                        <a href="${pageContext.request.contextPath}/hien-thi-san-pham/delete?id=${sanPham.id}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa không?');">Xóa</a>
+                        <a href="/hien-thi-san-pham/update/${sanPham.id}" class="btn btn-warning btn-sm">Sửa</a>
+                        <a href="/hien-thi-san-pham/delete?id=${sanPham.id}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa không?');">Xóa</a>
                     </td>
                 </tr>
             </c:forEach>
