@@ -1,5 +1,6 @@
 package com.example.trendsetter.Controller;
 
+import com.example.trendsetter.Config.WebConfig;
 import com.example.trendsetter.Entity.*;
 import com.example.trendsetter.Repository.DanhMucRepository;
 import com.example.trendsetter.Repository.KichThuocRepository;
@@ -9,6 +10,7 @@ import com.example.trendsetter.Service.DanhMucService;
 import com.example.trendsetter.Service.SanPhamChiTietService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +37,9 @@ public class SanPhamChiTietController {
     private KichThuocRepository kichThuocRepository;
     @Autowired
     private DanhMucService danhMucService;
+
+    @Value("${upload.path}")
+    private String uploadPath;
 
     @ModelAttribute("listSanPham")
     public List<SanPham> getSanPham() {
@@ -89,19 +94,22 @@ public class SanPhamChiTietController {
         sanPhamChiTiet.setMaMauSac(mauSacRepository.findById(maMauSacId).orElse(null));
         sanPhamChiTiet.setMaKichThuoc(kichThuocRepository.findById(maKichThuocId).orElse(null));
 
-
         // Xử lý upload hình ảnh
         if (hinhAnhFile != null && !hinhAnhFile.isEmpty()) {
             try {
                 String fileName = System.currentTimeMillis() + "_" + hinhAnhFile.getOriginalFilename();
-                Path uploadPath = Paths.get("src/main/resources/static/images/");
-                if (!Files.exists(uploadPath)) Files.createDirectories(uploadPath);
-                //lưu ảnh vào thư mục
-                Path filePath = uploadPath.resolve(fileName);
+                Path uploadFolderPath = Paths.get(uploadPath);
+                if (!Files.exists(uploadFolderPath)) Files.createDirectories(uploadFolderPath);
+
+                // Lưu ảnh vào thư mục
+                Path filePath = uploadFolderPath.resolve(fileName);
                 Files.copy(hinhAnhFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+                // Lưu đường dẫn hình ảnh tương đối vào cơ sở dữ liệu
                 sanPhamChiTiet.setHinhAnh(fileName);
             } catch (IOException e) {
-                model.addAttribute("errorMessage", "Lỗi khi tải lên hình ảnh!");
+                model.addAttribute("errorMessage", "Lỗi khi tải lên hình ảnh: " + e.getMessage());
+                e.printStackTrace(); // Ghi log lỗi
                 return "SanPhamChiTiet/add";
             }
         }
@@ -125,7 +133,7 @@ public class SanPhamChiTietController {
     // Xử lý cập nhật sản phẩm chi tiết
     @PostMapping("/hien-thi-san-pham-chi-tiet/update")
     public String updateSanPham(
-            @RequestParam("id") Integer id, // thêm id vào các tham số
+            @RequestParam("id") Integer id,
             @RequestParam("maSanPham") Integer maSanPham,
             @RequestParam("moTa") String moTa,
             @RequestParam("soLuong") Integer soLuong,
@@ -135,10 +143,10 @@ public class SanPhamChiTietController {
             @RequestParam("hinhAnh") MultipartFile hinhAnhFile,
             Model model) {
 
-        SanPhamChiTiet sanPhamChiTiet = sanPhamChiTietService.findById(id); // Lấy đối tượng hiện tại từ DB
+        SanPhamChiTiet sanPhamChiTiet = sanPhamChiTietService.findById(id);
         if (sanPhamChiTiet == null) {
             model.addAttribute("errorMessage", "Sản phẩm chi tiết không tồn tại!");
-            return "redirect:/hien-thi-san-pham-chi-tiet"; // Nếu không tìm thấy, quay lại trang hiển thị
+            return "redirect:/hien-thi-san-pham-chi-tiet";
         }
 
         // Cập nhật các thuộc tính
@@ -153,27 +161,31 @@ public class SanPhamChiTietController {
         if (hinhAnhFile != null && !hinhAnhFile.isEmpty()) {
             try {
                 String fileName = System.currentTimeMillis() + "_" + hinhAnhFile.getOriginalFilename();
-                Path uploadPath = Paths.get("src/main/resources/static/images/");
+                Path uploadPath = Paths.get(this.uploadPath);
                 if (!Files.exists(uploadPath)) Files.createDirectories(uploadPath);
-                //lưu ảnh vào thư mục
+
+                // Lưu ảnh vào thư mục
                 Path filePath = uploadPath.resolve(fileName);
                 Files.copy(hinhAnhFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+                // Cập nhật đường dẫn hình ảnh vào cơ sở dữ liệu
                 sanPhamChiTiet.setHinhAnh(fileName);
             } catch (IOException e) {
-                model.addAttribute("errorMessage", "Lỗi khi tải lên hình ảnh!");
+                model.addAttribute("errorMessage", "Lỗi khi tải lên hình ảnh: " + e.getMessage());
+                e.printStackTrace(); // Ghi log lỗi
                 return "SanPhamChiTiet/update";
             }
         }
 
-        sanPhamChiTietService.save(sanPhamChiTiet); // Lưu lại đối tượng đã cập nhật
+        sanPhamChiTietService.save(sanPhamChiTiet);
         return "redirect:/main#!/hien-thi-san-pham-chi-tiet";
     }
 
     // Xóa sản phẩm chi tiết
-    @GetMapping("/hien-thi-san-pham-chi-tiet/delete/{id}")
-    public String deleteSanPhamChiTiet(@PathVariable("id") Integer id) {
+    @GetMapping("/hien-thi-san-pham-chi-tiet/delete")
+    public String deleteSanPhamChiTiet(@RequestParam("id") Integer id) {
         sanPhamChiTietService.delete(id);
-        return "redirect:/main#!/hien-thi-san-pham-chi-tiet"; // Quay lại trang danh sách sau khi xóa
+        return "redirect:/main#!/hien-thi-san-pham-chi-tiet";
     }
 
     // Kiểm tra người dùng đã đăng nhập

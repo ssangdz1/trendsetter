@@ -94,8 +94,8 @@
                 </td>
                 <td>${chiTiet.moTa}</td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/hien-thi-san-pham-chi-tiet/update/${chiTiet.id}" class="btn btn-primary">Sửa</a>
-                    <a href="${pageContext.request.contextPath}/hien-thi-san-pham-chi-tiet/delete?id=${chiTiet.id}" class="btn btn-danger">Xóa</a>
+                    <a href="/hien-thi-san-pham-chi-tiet/update/${chiTiet.id}" class="btn btn-primary">Sửa</a>
+                    <a href="/hien-thi-san-pham-chi-tiet/delete?id=${chiTiet.id}" class="btn btn-danger">Xóa</a>
                 </td>
             </tr>
         </c:forEach>
