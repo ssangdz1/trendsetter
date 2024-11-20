@@ -1,0 +1,66 @@
+/* Reset một số thuộc tính mặc định của trình duyệt */
+body, h1, h2, h3, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Đặt màu nền và kiểu chữ cho toàn bộ trang */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fa; /* Màu nền nhạt */
+    color: #333; /* Màu chữ */
+}
+
+/* Thiết lập kiểu cho header */
+header {
+    background: linear-gradient(90deg, #343a40, #495057); /* Gradient cho header */
+}
+
+/* Cải thiện khoảng cách và kiểu cho tiêu đề */
+h1 {
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+/* Kiểu cho các thông báo */
+.alert {
+    border-radius: 5px;
+    padding: 15px;
+}
+
+/* Kiểu cho nav bar */
+.navbar {
+    border-bottom: 2px solid #007bff; /* Đường viền bên dưới */
+}
+
+/* Tăng cường kiểu cho các nút */
+.btn {
+    border-radius: 20px; /* Bo tròn các nút */
+}
+
+/* Kiểu cho footer */
+footer {
+    background-color: #343a40;
+    border-top: 2px solid #007bff; /* Đường viền trên footer */
+}
+
+/* Cải thiện kiểu cho các liên kết */
+.nav-link {
+    transition: color 0.3s; /* Hiệu ứng chuyển màu */
+}
+
+.nav-link:hover {
+    color: #007bff; /* Màu khi hover */
+}
+
+/* Nguyên tắc cho container chính */
+.container {
+    padding: 20px;
+}
+
+/* Kiểu cho các alert */
+.alert-info {
+    background-color: #e9f7fe; /* Màu nền cho alert */
+    border-color: #b8e4f9; /* Đường viền cho alert */
+    color: #31708f; /* Màu chữ cho alert */
+}

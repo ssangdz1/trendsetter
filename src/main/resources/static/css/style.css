@@ -1,0 +1,129 @@
+/* style.css */
+
+/* Cài đặt toàn cục cho body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Màu nền nhẹ nhàng */
+    color: #333; /* Màu chữ tối */
+}
+
+/* Định dạng cho giỏ hàng */
+.cart-form {
+    border: 1px solid #ccc;
+    padding: 20px;
+    position: absolute;
+    right: 0;
+    top: 70px;
+    width: 300px;
+    z-index: 1000;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Tiêu đề giỏ hàng */
+.cart-form h3 {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Mục trong giỏ hàng */
+.cart-form li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    color: #333;
+}
+
+/* Nút xóa sản phẩm */
+.cart-form .btn-danger {
+    color: #ffffff;
+}
+
+/* Định dạng cho header */
+header {
+    position: relative;
+    z-index: 1000;
+}
+
+/* Định dạng cho sản phẩm */
+.product {
+    margin-bottom: 30px; /* Khoảng cách giữa các sản phẩm */
+}
+
+.product-card {
+    border: none; /* Bỏ viền */
+    border-radius: 10px; /* Bo tròn các góc */
+    overflow: hidden; /* Ẩn các phần tử bên ngoài viền */
+    transition: transform 0.2s; /* Hiệu ứng chuyển động */
+}
+
+.product-card:hover {
+    transform: scale(1.05); /* Phóng to sản phẩm khi hover */
+}
+
+.card-img-top {
+    height: 200px; /* Kích thước cố định cho hình ảnh */
+    object-fit: cover; /* Giữ tỷ lệ hình ảnh */
+}
+
+/* Nút mua ngay */
+.btn-primary {
+    background-color: #007bff; /* Màu nền nút */
+    border-color: #007bff; /* Màu viền nút */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Màu nền khi hover */
+}
+
+/* Định dạng footer */
+footer {
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+footer h5 {
+    margin-bottom: 10px;
+}
+
+/* Định dạng cho ô nhập email */
+footer .form-control {
+    width: 300px; /* Chiều rộng ô nhập */
+}
+
+/* Nút đăng ký */
+footer .btn-warning {
+    background-color: #ffc107; /* Màu nền nút */
+    border: none; /* Bỏ viền */
+}
+
+/* Hiệu ứng cuộn cho các phần tử */
+.scroll-animation {
+    opacity: 0; /* Bắt đầu với độ mờ */
+    transform: translateY(20px); /* Đẩy phần tử xuống 20px */
+    transition: opacity 0.6s ease, transform 0.6s ease; /* Hiệu ứng chuyển động */
+}
+
+/* Khi phần tử trong tầm nhìn */
+.scroll-animation.visible {
+    opacity: 1; /* Độ mờ đầy đủ */
+    transform: translateY(0); /* Đưa phần tử về vị trí ban đầu */
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #4CAF50; /* Màu xanh */
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    opacity: 1;
+    transition: opacity 0.6s;
+    z-index: 1000; /* Đảm bảo thông báo ở trên cùng */
+}
